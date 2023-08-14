@@ -11,11 +11,16 @@ export default defineConfig({
     setupFiles: "./src/setupTests.ts",
     include: ["./src/**/*.test.{ts,tsx}"],
     coverage: {
-      provider: "c8",
+      provider: "v8",
       reporter: ["lcov", "text"],
+      include: ["**/src/**/*.{ts,tsx}"],
+      exclude: [
+        "**/*.test.{ts,tsx}",
+        "**/types.ts",
+        "**/*.d.ts",
+        "**/src/main.tsx",
+      ],
       all: true,
-      src: ["src"],
-      exclude: ["**/*.test.{ts,tsx}", "**/types.ts", "**/*.d.ts"],
     },
   },
 });
