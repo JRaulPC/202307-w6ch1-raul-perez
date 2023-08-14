@@ -1,10 +1,10 @@
 import { useContext, useEffect } from "react";
 import Count from "../../components/Count/Count";
 import FilmsList from "../../components/FilmsList/FilmsList";
-import FilmContext from "../../store/films/FilmsContext";
+import FilmsContext from "../../store/films/FilmsContext";
 
 const FilmsListPage = (): React.ReactElement => {
-  const { loadFilms } = useContext(FilmContext);
+  const { loadFilms } = useContext(FilmsContext);
 
   useEffect(() => {
     (async () => {

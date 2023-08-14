@@ -6,8 +6,8 @@ export interface FilmsContextStructure {
   loadFilms: () => Promise<void>;
 }
 
-const FilmContext = createContext<FilmsContextStructure>(
+const FilmsContext = createContext<FilmsContextStructure>(
   {} as FilmsContextStructure,
 );
 
-export default FilmContext;
+export default FilmsContext;
