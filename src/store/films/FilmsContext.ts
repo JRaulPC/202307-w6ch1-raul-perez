@@ -2,7 +2,8 @@ import { createContext } from "react";
 import { Film } from "../../types";
 
 export interface FilmsContextStructure {
-  Films: Film[];
+  films: Film[];
+  loadFilms: () => Promise<void>;
 }
 
 const FilmContext = createContext<FilmsContextStructure>(
