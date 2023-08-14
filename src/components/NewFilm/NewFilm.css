@@ -1,0 +1,27 @@
+.form-film {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  @media (min-width: 500px) {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.form-control label {
+  @media (min-width: 500px) {
+    flex: 100px;
+  }
+}
+
+.form-control input {
+  width: 100%;
+  padding: 5px 10px;
+}

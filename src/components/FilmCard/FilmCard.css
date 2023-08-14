@@ -1,0 +1,31 @@
+.film {
+  width: 300px;
+  position: relative;
+}
+
+.film__title {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.film__poster {
+  object-fit: cover;
+}
+
+.film__button {
+  border: none;
+  border-radius: 50%;
+  background-color: #000;
+  color: #fff;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 50px;
+  aspect-ratio: 1;
+  transition: all 0.2s;
+}
+
+.film__button:hover {
+  background-color: #fff;
+  color: #000;
+}

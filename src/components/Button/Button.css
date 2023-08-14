@@ -1,0 +1,8 @@
+.button {
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+}
+
+.button:disabled {
+  opacity: 0.5;
+}

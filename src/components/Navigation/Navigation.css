@@ -1,0 +1,13 @@
+.main-navigation > ul {
+  display: flex;
+  gap: 10px;
+
+  @media (min-width: 500px) {
+    gap: 20px;
+  }
+}
+
+.main-navigation .active {
+  font-weight: bold;
+  text-decoration: underline;
+}
