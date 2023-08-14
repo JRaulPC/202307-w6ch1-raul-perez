@@ -7,15 +7,6 @@ const FilmsList = (): React.ReactElement => {
       <li>
         <FilmCard />
       </li>
-      <li>
-        <FilmCard />
-      </li>
-      <li>
-        <FilmCard />
-      </li>
-      <li>
-        <FilmCard />
-      </li>
     </ul>
   );
 };
