@@ -9,7 +9,7 @@ describe("Given a FilmListPage componente", () => {
 
       render(
         <FilmsContextProvider>
-          <FilmsListPage></FilmsListPage>
+          <FilmsListPage />
         </FilmsContextProvider>,
       );
 
