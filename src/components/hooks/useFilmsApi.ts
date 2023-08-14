@@ -11,7 +11,7 @@ const useFilmsApi = () => {
 
       return apiFilms;
     } catch (error) {
-      throw new Error("Can'get Films from Api rest");
+      throw new Error("Can't get the films list!");
     }
   }, []);
 

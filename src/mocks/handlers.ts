@@ -10,6 +10,6 @@ export const handlers = [
 
 export const handlersError = [
   rest.get(`${apiURL}/films`, (_req, res, ctx) => {
-    return res(ctx.status(404, "Can't get characters"));
+    return res(ctx.status(404, "Can't get the films list!"));
   }),
 ];
