@@ -1,14 +1,15 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import FilmsContext from "../../store/films/FilmsContext";
-import { NewFilmStructure } from "../../types";
+import { Film, NewFilmStructure } from "../../types";
 import Button from "../Button/Button";
 import "./NewFilm.css";
 
-const NewFilm = (): React.ReactElement => {
-  const [disabled, setDisabled] = useState(true);
+interface NewFilmProps {
+  addFilm: (film: Partial<Film>) => Promise<void>;
+}
 
-  const { addFilm } = useContext(FilmsContext);
+const NewFilm = ({ addFilm }: NewFilmProps): React.ReactElement => {
+  const [disabled, setDisabled] = useState(true);
 
   const newFilmData = {
     title: "",
