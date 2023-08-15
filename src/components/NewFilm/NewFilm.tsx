@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import FilmsContext from "../../store/films/FilmsContext";
 import { NewFilmStructure } from "../../types";
 import Button from "../Button/Button";
@@ -15,6 +16,8 @@ const NewFilm = (): React.ReactElement => {
     director: "",
     year: 0,
   };
+
+  const navigate = useNavigate();
 
   const [newFilm, setNewFilm] = useState<NewFilmStructure>(newFilmData);
   const { director, title, poster, year } = newFilm;
@@ -38,6 +41,7 @@ const NewFilm = (): React.ReactElement => {
       onSubmit={(event) => {
         event.preventDefault();
         addFilm(newFilm);
+        navigate("/films");
       }}
     >
       <div className="form-control">
@@ -63,7 +67,7 @@ const NewFilm = (): React.ReactElement => {
       </div>
       <div className="form-control">
         <Button disabled={disabled} type="submit">
-          Crear película{" "}
+          Crear película
         </Button>
       </div>
     </form>
