@@ -5,3 +5,10 @@ export interface Film {
   director: string;
   year: number;
 }
+
+export interface NewFilmStructure {
+  title: string;
+  poster: string;
+  director: string;
+  year: number;
+}
