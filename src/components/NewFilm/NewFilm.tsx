@@ -10,7 +10,7 @@ const NewFilm = (): React.ReactElement => {
     title: "",
     poster: "",
     director: "",
-    year: 2000,
+    year: 0,
   };
 
   const [newFilm, setNewFilm] = useState<NewFilmStructure>(newFilmData);
@@ -49,7 +49,7 @@ const NewFilm = (): React.ReactElement => {
       </div>
       <div className="form-control">
         <label htmlFor="year">Año: </label>
-        <input type="number" id="year" value={year} onChange={changeNewFilm} />
+        <input type="number" id="year" onChange={changeNewFilm} />
       </div>
       <div className="form-control">
         <label htmlFor="poster">URL cartel: </label>
