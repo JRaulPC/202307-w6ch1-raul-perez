@@ -1,3 +1,5 @@
+import { Film } from "../types";
+
 export const mockedFilms = [
   {
     id: 1,
@@ -30,4 +32,10 @@ export const mockedFilms = [
   },
 ];
 
-export default mockedFilms;
+export const newMockedFilm: Partial<Film> = {
+  title: "No es país para viejos",
+  poster:
+    "https://pics.filmaffinity.com/no_country_for_old_men-150566696-large.jpg",
+  director: "Joel Coen, Ethan Coen",
+  year: 2007,
+};

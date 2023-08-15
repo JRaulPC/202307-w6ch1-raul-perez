@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import Film from "../../store/films/types";
+import { Film } from "../../types";
 
 export const apiURL = import.meta.env.VITE_API_PELIS_URL;
 
@@ -15,17 +15,21 @@ const useFilmsApi = () => {
     }
   }, []);
 
-  const addFilm = async (film: Film) => {
-    const response = await fetch(apiURL, {
-      headers: { "Content-Type": "application/json" },
-      method: "POST",
-      body: JSON.stringify(film),
-    });
+  const addFilm = useCallback(async (film: Partial<Film>) => {
+    try {
+      const response = await fetch(`${apiURL}/films`, {
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        body: JSON.stringify(film),
+      });
 
-    const newFilm = (await response.json()) as Film;
+      const newFilm = (await response.json()) as Film;
 
-    return newFilm;
-  };
+      return newFilm;
+    } catch (error) {
+      throw new Error("Can't post film!");
+    }
+  }, []);
 
   return { getFilms, addFilm };
 };

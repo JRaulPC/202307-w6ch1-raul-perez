@@ -5,8 +5,8 @@ import React, {
   useState,
 } from "react";
 import useFilmsApi from "../../components/hooks/useFilmsApi";
+import { Film } from "../../types";
 import FilmsContext, { FilmsContextStructure } from "./FilmsContext";
-import Film from "./types";
 
 const FilmsContextProvider = ({
   children,
@@ -22,7 +22,7 @@ const FilmsContextProvider = ({
   }, [getFilms]);
 
   const addFilm = useCallback(
-    async (film: Film) => {
+    async (film: Partial<Film>) => {
       const newFilm = await addFilmToApi(film);
 
       setFilms((films) => [...films, newFilm]);

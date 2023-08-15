@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
-import mockedFilms from "../../mocks/mockedFilms";
+import { mockedFilms } from "../../mocks/mockedData";
 import FilmsContext from "../../store/films/FilmsContext";
 import Count from "./Count";
 
@@ -10,9 +10,12 @@ describe("Given a Count component", () => {
       const length = mockedFilms.length;
       const numberOfMovies = `Listando ${length} películas`;
       const loadFilms = vi.fn();
+      const addFilm = vi.fn();
 
       render(
-        <FilmsContext.Provider value={{ films: mockedFilms, loadFilms }}>
+        <FilmsContext.Provider
+          value={{ films: mockedFilms, addFilm, loadFilms }}
+        >
           <Count />
         </FilmsContext.Provider>,
       );
