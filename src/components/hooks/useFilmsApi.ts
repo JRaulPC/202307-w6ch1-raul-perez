@@ -15,7 +15,19 @@ const useFilmsApi = () => {
     }
   }, []);
 
-  return { getFilms };
+  const addFilm = async (film: Film) => {
+    const response = await fetch(apiURL, {
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      body: JSON.stringify(film),
+    });
+
+    const newFilm = (await response.json()) as Film;
+
+    return newFilm;
+  };
+
+  return { getFilms, addFilm };
 };
 
 export default useFilmsApi;
