@@ -5,28 +5,38 @@ import React, {
   useState,
 } from "react";
 import useFilmsApi from "../../components/hooks/useFilmsApi";
+import { Film } from "../../types";
 import FilmsContext, { FilmsContextStructure } from "./FilmsContext";
-import Film from "./types";
 
 const FilmsContextProvider = ({
   children,
 }: PropsWithChildren): React.ReactElement => {
-  const [films, setFilmList] = useState<Film[]>([]);
+  const [films, setFilms] = useState<Film[]>([]);
 
-  const { getFilms } = useFilmsApi();
+  const { getFilms, addFilm: addFilmToApi } = useFilmsApi();
 
   const loadFilms = useCallback(async () => {
     const apiFilms = await getFilms();
 
-    setFilmList([...apiFilms]);
+    setFilms([...apiFilms]);
   }, [getFilms]);
+
+  const addFilm = useCallback(
+    async (film: Partial<Film>) => {
+      const newFilm = await addFilmToApi(film);
+
+      setFilms((films) => [...films, newFilm]);
+    },
+    [addFilmToApi],
+  );
 
   const filmsContextValue = useMemo(
     (): FilmsContextStructure => ({
       loadFilms,
       films,
+      addFilm,
     }),
-    [films, loadFilms],
+    [films, loadFilms, addFilm],
   );
 
   return (

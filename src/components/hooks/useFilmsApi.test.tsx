@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react";
-import { handlersError } from "../../mocks/handlers";
-import mockedFilms from "../../mocks/mockedFilms";
+import { handlersError, newFilmHandler } from "../../mocks/handlers";
+import { mockedFilms, newMockedFilm } from "../../mocks/mockedData";
 import { server } from "../../mocks/serve";
 import useFilmsApi from "./useFilmsApi";
 
@@ -31,6 +31,21 @@ describe("Given a useFilmsApi custom hook", () => {
       const films = getFilms();
 
       expect(films).rejects.toThrowError(expectedError);
+    });
+    describe("When the addFilm function is called with the film 'No es país para viejos'", () => {
+      test("Then it should add the information of the film 'No es país para viejos' to the films list", async () => {
+        server.resetHandlers(...newFilmHandler);
+
+        const {
+          result: {
+            current: { addFilm },
+          },
+        } = renderHook(() => useFilmsApi());
+
+        const newfilm = await addFilm(newMockedFilm);
+
+        await expect(newfilm).toStrictEqual(newMockedFilm);
+      });
     });
   });
 });

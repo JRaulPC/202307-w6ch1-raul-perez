@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import mockedFilms from "../../mocks/mockedFilms";
+import { mockedFilms } from "../../mocks/mockedData";
 import FilmCard from "./FilmCard";
 
 describe("Given a FilmCard component", () => {
