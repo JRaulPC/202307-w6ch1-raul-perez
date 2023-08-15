@@ -23,8 +23,8 @@ describe("Given a NewFilm component", () => {
       expect(yearInput).toBeInTheDocument();
     });
 
-    describe("When 'Dune' is typed in the 'Título' text form control", () => {
-      test("Then it should show the text 'Dune' in the 'Título' text field", async () => {
+    describe("When user types all the data for the film 'Gladiator' in his respectives control forms", () => {
+      test("Then it should show all the info about the movie 'Gladiator' in the textboxes", async () => {
         const titleText = "Gladiator";
         const directionText = "Ridley Scott";
         const yearText = 2000;

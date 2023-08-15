@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import FilmsContext from "../../store/films/FilmsContext";
 import { NewFilmStructure } from "../../types";
 import Button from "../Button/Button";
 import "./NewFilm.css";
 
 const NewFilm = (): React.ReactElement => {
   const [disabled, setDisabled] = useState(true);
+
+  const { addFilm } = useContext(FilmsContext);
 
   const newFilmData = {
     title: "",
@@ -21,19 +24,22 @@ const NewFilm = (): React.ReactElement => {
       ...newFilm,
       [event.target.id]: event.target.value,
     }));
-    checkValidation();
   };
 
-  const checkValidation = () => {
-    if (title !== "" && director !== "" && year !== 0 && poster !== "") {
-      return setDisabled(false);
-    }
-
-    return setDisabled(true);
-  };
+  useEffect(() => {
+    title !== "" && director !== "" && year !== undefined && poster !== ""
+      ? setDisabled(false)
+      : setDisabled(true);
+  }, [director, newFilm, poster, title, year]);
 
   return (
-    <form className="form-film">
+    <form
+      className="form-film"
+      onSubmit={(event) => {
+        event.preventDefault();
+        addFilm(newFilm);
+      }}
+    >
       <div className="form-control">
         <label htmlFor="title">Título: </label>
         <input type="text" id="title" value={title} onChange={changeNewFilm} />
@@ -56,7 +62,9 @@ const NewFilm = (): React.ReactElement => {
         <input type="url" id="poster" value={poster} onChange={changeNewFilm} />
       </div>
       <div className="form-control">
-        <Button disabled={disabled}>Crear película</Button>
+        <Button disabled={disabled} type="submit">
+          Crear película{" "}
+        </Button>
       </div>
     </form>
   );
