@@ -1,8 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { BrowserRouter } from "react-router-dom";
+import { vi } from "vitest";
 import NewFilm from "./NewFilm";
 
 describe("Given a NewFilm component", () => {
+  const addFilm = vi.fn();
+
   describe("When it's rendered", () => {
     test("Then it should show a 'title' field, a ''poster' field, a 'director' field and a 'year' field", () => {
       const titleInputLabelText = "Título:";
@@ -10,7 +14,11 @@ describe("Given a NewFilm component", () => {
       const posterInputLabelText = "URL cartel:";
       const yearInputLabelText = "Año:";
 
-      render(<NewFilm />);
+      render(
+        <BrowserRouter>
+          <NewFilm addFilm={addFilm} />
+        </BrowserRouter>,
+      );
 
       const titleInput = screen.getByLabelText(titleInputLabelText);
       const directorInput = screen.getByLabelText(directorInputLabelText);
@@ -23,15 +31,19 @@ describe("Given a NewFilm component", () => {
       expect(yearInput).toBeInTheDocument();
     });
 
-    describe("When 'Dune' is typed in the 'Título' text form control", () => {
-      test("Then it should show the text 'Dune' in the 'Título' text field", async () => {
+    describe("When user types all the data for the film 'Gladiator' in his respectives control forms", () => {
+      test("Then it should show all the info about the movie 'Gladiator' in the textboxes", async () => {
         const titleText = "Gladiator";
         const directionText = "Ridley Scott";
         const yearText = 2000;
         const posterText =
           "https://pics.filmaffinity.com/gladiator-564554218-large.jpg";
 
-        render(<NewFilm />);
+        render(
+          <BrowserRouter>
+            <NewFilm addFilm={addFilm} />
+          </BrowserRouter>,
+        );
 
         const titleTextBox = screen.getByRole("textbox", {
           name: /título:/i,

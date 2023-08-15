@@ -1,5 +1,9 @@
 import { renderHook } from "@testing-library/react";
-import { handlersError, newFilmHandler } from "../../mocks/handlers";
+import {
+  handlersError,
+  newFilmHandler,
+  newFilmHandlerError,
+} from "../../mocks/handlers";
 import { mockedFilms, newMockedFilm } from "../../mocks/mockedData";
 import { server } from "../../mocks/serve";
 import useFilmsApi from "./useFilmsApi";
@@ -20,7 +24,7 @@ describe("Given a useFilmsApi custom hook", () => {
 
     test("Then it should throw an error when the request fails to get the film collection from the Api rest", async () => {
       server.resetHandlers(...handlersError);
-      const expectedError = new Error("Can't get the films list!");
+      const expectedFilmsError = new Error("Can't get the films list!");
 
       const {
         result: {
@@ -30,8 +34,9 @@ describe("Given a useFilmsApi custom hook", () => {
 
       const films = getFilms();
 
-      expect(films).rejects.toThrowError(expectedError);
+      expect(films).rejects.toThrowError(expectedFilmsError);
     });
+
     describe("When the addFilm function is called with the film 'No es país para viejos'", () => {
       test("Then it should add the information of the film 'No es país para viejos' to the films list", async () => {
         server.resetHandlers(...newFilmHandler);
@@ -45,6 +50,23 @@ describe("Given a useFilmsApi custom hook", () => {
         const newfilm = await addFilm(newMockedFilm);
 
         await expect(newfilm).toStrictEqual(newMockedFilm);
+      });
+
+      test("Then it should add the information of the film 'No es país para viejos' to the films list", async () => {
+        server.resetHandlers(...newFilmHandlerError);
+        const expectedFilmError = new Error(
+          "You can't post a new film right now",
+        );
+
+        const {
+          result: {
+            current: { addFilm },
+          },
+        } = renderHook(() => useFilmsApi());
+
+        const newfilm = addFilm(newMockedFilm);
+
+        expect(newfilm).rejects.toThrowError(expectedFilmError);
       });
     });
   });

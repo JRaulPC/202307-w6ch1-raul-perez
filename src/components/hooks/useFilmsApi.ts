@@ -27,7 +27,7 @@ const useFilmsApi = () => {
 
       return newFilm;
     } catch (error) {
-      throw new Error("Can't post film!");
+      throw new Error("You can't post a new film right now");
     }
   }, []);
 
